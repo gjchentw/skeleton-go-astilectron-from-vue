@@ -27,9 +27,9 @@ func main() {
 	// Create astilectron
 	a, err := astilectron.New(l, astilectron.Options{
 		AppName:           "Test",
-		BaseDirectoryPath: "example",
-		SkipSetup: true,
-		TCPPort: port,
+		BaseDirectoryPath: "public",
+		SkipSetup:         true,
+		TCPPort:           port,
 	})
 	if err != nil {
 		l.Fatal(fmt.Errorf("main: creating astilectron failed: %w", err))
@@ -48,8 +48,8 @@ func main() {
 	var w *astilectron.Window
 	if w, err = a.NewWindow("index.html", &astilectron.WindowOptions{
 		Center: astikit.BoolPtr(true),
-		Height: astikit.IntPtr(700),
-		Width:  astikit.IntPtr(700),
+		Height: astikit.IntPtr(600),
+		Width:  astikit.IntPtr(800),
 	}); err != nil {
 		l.Fatal(fmt.Errorf("main: new window failed: %w", err))
 	}
