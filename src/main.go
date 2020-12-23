@@ -39,14 +39,17 @@ func main() {
 	// Handle signals
 	a.HandleSignals()
 
+	fmt.Println("Start")
+	os.Stdout.Sync()
 	// Start
 	if err = a.Start(); err != nil {
 		l.Fatal(fmt.Errorf("main: starting astilectron failed: %w", err))
 	}
 
+
 	// New window
 	var w *astilectron.Window
-	if w, err = a.NewWindow("index.html", &astilectron.WindowOptions{
+	if w, err = a.NewWindow(os.Args[2], &astilectron.WindowOptions{
 		Center: astikit.BoolPtr(true),
 		Height: astikit.IntPtr(600),
 		Width:  astikit.IntPtr(800),
