@@ -1,6 +1,7 @@
 "use strict";
 
 import { app, protocol } from 'electron'
+import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -24,6 +25,11 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.on('ready', async () => {
+  if (!process.env.WEBPACK_DEV_SERVER_URL) {
+    createProtocol('app')
+  }
+})
 
 app.on('web-contents-created', async (event, webContents) => {
   if (isDevelopment && !process.env.IS_TEST) {
@@ -49,45 +55,6 @@ if (isDevelopment) {
       app.quit()
     })
   }
-}
-
-// edge case when the program is launched without arguments
-if (process.argv.length == 1) {
-  app.requestSingleInstanceLock();
-  app.quit();
-}
-
-if (process.argv[3] === "true") {
-  // Lock
-  const singlesInstanceLock = app.requestSingleInstanceLock();
-  if (!singlesInstanceLock) {
-    app.quit();
-  }
-
-  // Someone tried to run a second instance, we should focus our window.
-  app.on("second-instance", (event, commandLine, workingDirectory) => {
-    client.write(consts.targetIds.app, consts.eventNames.appEventSecondInstance, {secondInstance: {commandLine: commandLine, workingDirectory: workingDirectory}})
-    const lastWindow = getLastWindow()
-    if (lastWindow) {
-      if (lastWindow.isMinimized()) lastWindow.restore();
-      lastWindow.show();
-    }
-  });
-}
-
-// Command line switches
-let idx = 4;
-for (let i = idx; i < process.argv.length; i++) {
-  let s = process.argv[i].replace(/^[\\-]+/g, "");
-  let v;
-  if (
-    typeof process.argv[i + 1] !== "undefined" &&
-    !process.argv[i + 1].startsWith("-")
-  ) {
-    v = process.argv[i + 1];
-    i++;
-  }
-  app.commandLine.appendSwitch(s, v);
 }
 
 const port = "9090";
