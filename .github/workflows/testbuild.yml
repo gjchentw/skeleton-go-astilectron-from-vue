@@ -1,0 +1,25 @@
+name: Build if pushed or merged
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Generate build files for go compoment
+        uses: thatisuday/go-build-action@v1
+        with:
+          platforms: "linux/amd64, linux/arm64, darwin/amd64, darwin/arm64, windows/amd64"
+          package: "./cmd/main"
+          name: "main"
+          compress: "false"
+          dest: "bin"
+      - name: List go compoment
+        run: 'ls -l *'
