@@ -6,7 +6,7 @@ import installExtension from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
-import { start, getLastWindow, client, consts } from 'astilectron';
+import { start, client } from 'astilectron';
 
 const join = require("path").join;
 const child_process = require("child_process");
