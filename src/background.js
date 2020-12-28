@@ -60,7 +60,7 @@ if (isDevelopment) {
 const port = "9090";
 // Start go-astilectron
 const cmd = child_process.spawn(
-  (isDevelopment ? join(process.cwd(), 'bin', "main") : join(process.resourcesPath, 'bin', 'main')), 
+  (isDevelopment ? join(process.cwd(), 'bin', 'main.exe') : join(process.resourcesPath, 'bin', 'main.exe')), 
   [port, process.env.WEBPACK_DEV_SERVER_URL ? process.env.WEBPACK_DEV_SERVER_URL : 'app://./index.html']
 )
 cmd.stdout.pipe(process.stdout);
