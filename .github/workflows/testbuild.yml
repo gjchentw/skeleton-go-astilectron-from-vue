@@ -14,16 +14,16 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Build for linux/amd64
-        run: docker run -e GOOS=linux -e GOARCH=amd64 -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=linux -e GOARCH=amd64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: Build for linux/arm64
-        run: docker run -e GOOS=linux -e GOARCH=arm64 -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=linux -e GOARCH=arm64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: Build for darwin/amd64
-        run: docker run -e GOOS=darwin -e GOARCH=amd64 -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=darwin -e GOARCH=amd64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: Build for darwin/arm64
-        run: docker run -e GOOS=darwin -e GOARCH=arm64 -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=darwin -e GOARCH=arm64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: Build for windows/amd64
-        run: docker run -e GOOS=windows -e GOARCH=amd64 -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=windows -e GOARCH=amd64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: Build for windows/arm
-        run: docker run -e GOOS=windows -e GOARCH=arm -e HOME=/tmp -u 1000:1000 -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
+        run: docker run -e GOOS=windows -e GOARCH=arm -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main-${GOOS}-${GOARCH} ./cmd/main'
       - name: List go compoment
         run: 'ls -l *'
