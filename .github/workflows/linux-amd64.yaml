@@ -1,0 +1,19 @@
+name: Build linux/amd64
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Build GO
+        run: docker run -e GOOS=linux -e GOARCH=amd64 -e HOME=/tmp -v $(pwd):/go/src/app -w /go/src/app golang:rc bash -c 'go build -buildmode exe -o bin/main ./cmd/main'
+      - name: Build ELECTRON
+        run: docker run -e HOME=/tmp -v $(pwd):/app -w /app node:lts bash -c 'npm run electron:build -- --linux deb'
